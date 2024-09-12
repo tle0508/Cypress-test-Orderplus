@@ -1,0 +1,24 @@
+export function login(phoneNumber, password) {
+    cy.visit('https://app-dev.orderplus.me/login');
+    cy.wait(1000);
+    cy.get('input[placeholder="หมายเลขโทรศัพท์"]').type(phoneNumber);
+    cy.wait(1000);
+    cy.get('input[placeholder="รหัสผ่าน"]').type(password);
+    cy.wait(1000);
+    cy.contains('span','เข้าสู่ระบบ').click();
+    cy.wait(1000);
+  }
+  
+  export function logout() {
+    cy.visit('https://app-dev.orderplus.me/login');
+    cy.get('i.el-icon.el-sub-menu__icon-arrow').click();
+    cy.wait(2000);
+    cy.get('li.el-menu-item.menu-logout').contains('ออกจากระบบ').click();
+  }
+
+  export function goToShop(Shop_Name) {
+    cy.visit('https://app-dev.orderplus.me/login');
+    cy.get('.block-card').contains(Shop_Name).click();
+    cy.wait(2000);
+  }
+

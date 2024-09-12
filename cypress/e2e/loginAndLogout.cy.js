@@ -1,5 +1,5 @@
 
-import { login, logout } from '../support/authFunctions';
+import { login, logout }  from '../support/allFunction/generalFunction';
 
 describe('Login and logout test dev', () => {
 

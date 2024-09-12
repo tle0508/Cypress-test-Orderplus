@@ -1,4 +1,4 @@
-import { login } from '../support/authFunctions';
+import { login } from '../support/allFunction/generalFunction';
 
 describe('Login test dev', () => {
 
