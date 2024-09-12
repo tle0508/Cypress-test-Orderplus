@@ -16,9 +16,9 @@ export function login(phoneNumber, password) {
     cy.get('li.el-menu-item.menu-logout').contains('ออกจากระบบ').click();
   }
 
-  export function goToShop(Shop_Name) {
+  export function goToShop() {
     cy.visit('https://app-dev.orderplus.me/login');
-    cy.get('.block-card').contains(Shop_Name).click();
+    cy.get('.block-card').contains('กุ่กกุ่กกั่กกั่กกั้กกั่กกุ้กกุ้ก').click();
     cy.wait(2000);
   }
 

@@ -8,7 +8,7 @@ describe('Login test dev', () => {
   });
 
   it('login  passes', () => {
-    goToShop('กุ่กกุ่กกั่กกั่กกั้กกั่กกุ้กกุ้ก');
+    goToShop();
     
   });
 
