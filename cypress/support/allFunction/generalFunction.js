@@ -17,7 +17,7 @@ export function login(phoneNumber, password) {
   }
 
   export function goToShop() {
-    cy.visit('https://app-dev.orderplus.me/login');
+    cy.visit('https://app-dev.orderplus.me/dashboard');
     cy.get('.block-card').contains('กุ่กกุ่กกั่กกั่กกั้กกั่กกุ้กกุ้ก').click();
     cy.wait(2000);
   }

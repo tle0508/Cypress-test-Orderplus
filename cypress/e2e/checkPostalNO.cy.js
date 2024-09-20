@@ -1,5 +1,5 @@
 
-import { createCategory } from '../support/allFunction/createCategory';
+import { checkPostalNumber } from '../support/allFunction/checkPostalNumber';
 import { goToShop } from '../support/allFunction/generalFunction';
 describe('creates prder test dev', () => {
 
@@ -9,6 +9,6 @@ describe('creates prder test dev', () => {
 
   it('create category', () => {
     goToShop();
-    createCategory('ddddqr');
+    checkPostalNumber();
   });
 });

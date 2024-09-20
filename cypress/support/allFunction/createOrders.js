@@ -288,7 +288,7 @@
       cy.wait(3000);  
     }
   }
-  export function createOrderAllTransports (name, phoneNumber, address, province, district, subDistrict, transport, price,orderCount) {
+  export function createOrderAllTransports (name, phoneNumber, address, province, district, subDistrict, price) {
     const transports = ['Flash', 'Kerry', 'Thailand Post', 'Shopee', 'DHL'];
     for (let i = 0; i < transports.length; i++) {
       cy.contains('span', 'คำสั่งซื้อ').click();
