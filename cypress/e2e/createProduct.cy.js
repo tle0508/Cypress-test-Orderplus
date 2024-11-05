@@ -1,6 +1,6 @@
 
 import { createProduct } from '../support/allFunction/createProductFunction';
-import { goToShop } from '../support/allFunction/generalFunction';
+import { goToShop,logout} from '../support/allFunction/generalFunction';
 
 describe('create product test dev', () => {
 
@@ -9,8 +9,9 @@ describe('create product test dev', () => {
   });
 
   it('create product pass', () => {
-    goToShop();
+    goToShop('dev');
     createProduct('ff','a_','ของดีจากนครนายก','ทั่วไป',60,16,50,13555,5);
+    logout();
   });
   
 

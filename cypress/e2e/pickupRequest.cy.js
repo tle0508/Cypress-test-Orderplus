@@ -1,16 +1,17 @@
-import { goToShop } from '../support/allFunction/generalFunction';
-import { pickUpRequest } from '../support/allFunction/pickUpRequest';
 
-describe('Login test dev', () => {
+import { pickUpRequest } from '../support/allFunction/pickUpRequest';
+import { goToShop,logout} from '../support/allFunction/generalFunction';
+
+describe('pickUp test dev', () => {
 
   beforeEach(() => {
     cy.viewport(1290, 900);
   });
 
   it('login  passes', () => {
-    goToShop();
-    pickUpRequest('Thailand Post','tle','0951389574','4','ดีครับ');
-    
+    // goToShop('dev');
+    // pickUpRequest('tle','0951389574','4','ดีครับ');
+    // logout();
   });
 
 });

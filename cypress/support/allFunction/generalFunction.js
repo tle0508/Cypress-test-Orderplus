@@ -1,24 +1,42 @@
-export function login(phoneNumber, password) {
+export function loginProd() {
+    cy.visit('https://web.orderplus.me/login');
+    cy.wait(1000);
+    cy.get('input[placeholder="หมายเลขโทรศัพท์"]').type('0951385471');
+    cy.wait(1000);
+    cy.get('input[placeholder="รหัสผ่าน"]').type('testtest');
+    cy.wait(1000);
+    cy.contains('span','เข้าสู่ระบบ').click();
+    cy.wait(1000);
+  }
+
+  export function loginDev() {
     cy.visit('https://app-dev.orderplus.me/login');
     cy.wait(1000);
-    cy.get('input[placeholder="หมายเลขโทรศัพท์"]').type(phoneNumber);
+    cy.get('input[placeholder="หมายเลขโทรศัพท์"]').type('0918517610');
     cy.wait(1000);
-    cy.get('input[placeholder="รหัสผ่าน"]').type(password);
+    cy.get('input[placeholder="รหัสผ่าน"]').type('testtest');
     cy.wait(1000);
     cy.contains('span','เข้าสู่ระบบ').click();
     cy.wait(1000);
   }
   
   export function logout() {
-    cy.visit('https://app-dev.orderplus.me/login');
-    cy.get('i.el-icon.el-sub-menu__icon-arrow').click();
+    
+    cy.get('.custom-line').first().click();
     cy.wait(2000);
     cy.get('li.el-menu-item.menu-logout').contains('ออกจากระบบ').click();
   }
 
-  export function goToShop() {
-    cy.visit('https://app-dev.orderplus.me/dashboard');
-    cy.get('.block-card').contains('กุ่กกุ่กกั่กกั่กกั้กกั่กกุ้กกุ้ก').click();
-    cy.wait(2000);
+  export function goToShop(server) {
+    if(server == 'dev'){
+      loginDev();
+      cy.get('.block-card').contains('กุ่กกุ่กกั่กกั่กกั้กกั่กกุ้กกุ้ก').click();
+      cy.wait(2000);
+    }else{
+      loginProd();
+      cy.get('.block-card').contains('ร้านขายเสื้อ by DUCK [TEST]').click();
+      cy.wait(2000);
+    }
+    
   }
 

@@ -1,15 +1,15 @@
 
-import { goToShop } from '../support/allFunction/generalFunction';
+import { goToShop,logout} from '../support/allFunction/generalFunction';
 
-describe('Login test dev', () => {
+describe('goToShop test dev', () => {
 
   beforeEach(() => {
     cy.viewport(1290, 900);
   });
 
   it('login  passes', () => {
-    goToShop();
-    
+    goToShop('dev')
+    logout();
   });
 
 });

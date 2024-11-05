@@ -1,8 +1,8 @@
 export function createProduct(p_name,p_code,p_detail,Category,Weight,p_quantity,CostPrice,p_price,productCount) {
-    
+  cy.contains('span', 'สินค้า').click();
+  cy.wait(1000);
     for (let i = 0; i < productCount; i++) {
-    cy.contains('span', 'สินค้า').click();
-    cy.wait(1000);
+  
     cy.contains('li.el-menu-item', 'สร้างสินค้า').click();
     cy.wait(1500);
     

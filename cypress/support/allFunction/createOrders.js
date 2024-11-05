@@ -179,7 +179,8 @@
               return { district: "เขตทั่วไป", subDistrict: "ตำบลทั่วไป" };
       }
   }
-  
+  cy.contains('span', 'คำสั่งซื้อ').click();
+      cy.wait(1000);
   for (let i = 0; i < provinces.length; i++) {
       cy.contains('span', 'คำสั่งซื้อ').click();
       cy.wait(1000);
@@ -238,10 +239,9 @@
   
   }
   export function createOrderByNum (name, phoneNumber, address, province, district, subDistrict, transport, price,orderCount) {
-   
+    cy.contains('span', 'คำสั่งซื้อ').click();
+    cy.wait(1000);
     for (let i = 0; i < orderCount; i++) {
-      cy.contains('span', 'คำสั่งซื้อ').click();
-      cy.wait(1000);
       cy.contains('li.el-menu-item', 'สร้างออเดอร์').click();
       cy.wait(1000);
   
@@ -290,9 +290,10 @@
   }
   export function createOrderAllTransports (name, phoneNumber, address, province, district, subDistrict, price) {
     const transports = ['Flash', 'Kerry', 'Thailand Post', 'Shopee', 'DHL'];
+    cy.contains('span', 'คำสั่งซื้อ').click();
+    cy.wait(1000);
     for (let i = 0; i < transports.length; i++) {
-      cy.contains('span', 'คำสั่งซื้อ').click();
-      cy.wait(1000);
+      
       cy.contains('li.el-menu-item', 'สร้างออเดอร์').click();
       cy.wait(1000);
   
