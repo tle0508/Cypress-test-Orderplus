@@ -5,6 +5,8 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
     },
-    // Other Cypress configurations...
-  }
+
+  },
+  experimentalMemoryManagement: true,
+  numTestsKeptInMemory: 5,
 });

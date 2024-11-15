@@ -3,16 +3,13 @@ import { createOrderAllProvinces,createOrderByNum,createOrderAllTransports } fro
 import { goToShop,logout} from '../support/allFunction/generalFunction';
 describe('creates order test dev', () => {
 
-  beforeEach(() => {
-    cy.viewport(1290, 900);
-  });
-
+ 
   it('creates orders with various transport methods', () => {
     
     goToShop('dev');
     //createOrderAllTransports('sirun sununtasin', '0951385471', '57หมู่2', 'กรุงเทพ', 'ดอนเมือง', 'สนามบิน', '3000');
     //createOrderAllProvinces('sirun sununtasin', '0951385471', '57 หมู่ 2','Kerry',false,  '3000');
-    createOrderByNum('sirun sununtasin', '0951385471', '57หมู่2', 'กรุงเทพ', 'ดอนเมือง', 'สนามบิน', 'Kerry', '3000',5)
+    createOrderByNum('sirun sununtasin', '0951385471', '57หมู่2', 'กรุงเทพ', 'ดอนเมือง', 'สนามบิน', 'Kerry', '3000',3)
     logout();
   });
 });

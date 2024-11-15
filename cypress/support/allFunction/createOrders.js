@@ -1,6 +1,4 @@
 
-
-
   export function createOrderAllProvinces(name, phoneNumber, address,transport,insurance, price) {
    
 
@@ -179,9 +177,9 @@
               return { district: "เขตทั่วไป", subDistrict: "ตำบลทั่วไป" };
       }
   }
-  cy.contains('span', 'คำสั่งซื้อ').click();
-      cy.wait(1000);
-  for (let i = 0; i < provinces.length; i++) {
+    cy.contains('span', 'คำสั่งซื้อ').click();
+    cy.wait(1000);
+    for (let i = 0; i < provinces.length; i++) {
       cy.contains('span', 'คำสั่งซื้อ').click();
       cy.wait(1000);
       cy.contains('li.el-menu-item', 'สร้างออเดอร์').click();
@@ -238,34 +236,18 @@
   }
   
   }
+
   export function createOrderByNum (name, phoneNumber, address, province, district, subDistrict, transport, price,orderCount) {
     cy.contains('span', 'คำสั่งซื้อ').click();
     cy.wait(1000);
     for (let i = 0; i < orderCount; i++) {
       cy.contains('li.el-menu-item', 'สร้างออเดอร์').click();
       cy.wait(1000);
-  
-      cy.get('input[placeholder="ชื่อผู้รับ"]').type(`${name} ${i + 1}`);  
+
+      cy.get('textarea').clear().first().type(`${name}${i + 1} ${phoneNumber} ${address} ${province} ${district} ${subDistrict}`);
       cy.wait(1000);
-      cy.get('input[placeholder="เบอร์โทรศัพท์"]').type(phoneNumber);
-      cy.wait(1000);
-      cy.get('textarea#addressInput').click().type(address);
-      cy.wait(1000);
-  
-      cy.contains('span', 'จังหวัด').click();
-      cy.wait(1000);
-      cy.get('li.el-select-dropdown__item').contains('span', province).click();
-      cy.wait(1000);
-  
-      cy.contains('span', 'เขต/อำเภอ').click();
-      cy.wait(1000);
-      cy.get('li.el-select-dropdown__item').contains('span', district).click();
-      cy.wait(1000);
-  
-      cy.contains('span', 'แขวง/ตำบล').parent().click();
-      cy.wait(1000);
-      cy.get('li.el-select-dropdown__item').contains('span', subDistrict).click();
-      cy.wait(1000);
+      cy.contains('button', 'ยืนยัน').click();
+   
   
       cy.contains('span', 'Thailand Post').parent().click();
       cy.wait(1000);
@@ -288,6 +270,7 @@
       cy.wait(3000);  
     }
   }
+  
   export function createOrderAllTransports (name, phoneNumber, address, province, district, subDistrict, price) {
     const transports = ['Flash', 'Kerry', 'Thailand Post', 'Shopee', 'DHL'];
     cy.contains('span', 'คำสั่งซื้อ').click();
@@ -333,7 +316,6 @@
         if ($body.find('.el-dialog.el-dialog--center').length > 0) {
           cy.get('.el-dialog.el-dialog--center').contains('span', 'ยืนยัน').click();
         } else {
-          // Dialog not found, so skip the confirmation step
           cy.log('No confirmation dialog appeared, skipping...');
         }
       });
@@ -341,4 +323,37 @@
     }
   }
 
- 
+  export function createOrderByYourSelf (name, phoneNumber, address, province, district, subDistrict, price,orderCount) {
+    cy.contains('span', 'คำสั่งซื้อ').click();
+    cy.wait(1000);
+    for (let i = 0; i < orderCount; i++) {
+      cy.contains('li.el-menu-item', 'สร้างออเดอร์').click();
+      cy.wait(1000);
+
+      cy.get('textarea').clear().first().type(`${name}${i + 1} ${phoneNumber} ${address} ${province} ${district} ${subDistrict}`);
+      cy.wait(1000);
+      cy.contains('button', 'ยืนยัน').click();
+      cy.wait(1000);
+
+      cy.contains('span', 'จัดส่งในระบบ').parent().click();
+      cy.wait(1000);
+      cy.get('li.el-select-dropdown__item').contains('div','จัดส่งเอง').click();
+      cy.wait(1000);
+      
+      cy.contains('span','เลือกสินค้า').click();
+      cy.get('.el-checkbox__inner').eq(1).click();
+      cy.contains('span','ตกลง (1)').click();
+      cy.get('.el-button.btn-create').click();
+      cy.wait(2000);
+  
+      cy.get('body').then(($body) => {
+        if ($body.find('.el-dialog.el-dialog--center').length > 0) {
+          cy.get('.el-dialog.el-dialog--center').contains('span', 'ยืนยัน').click();
+        } else {
+          // Dialog not found, so skip the confirmation step
+          cy.log('No confirmation dialog appeared, skipping...');
+        }
+      });
+      cy.wait(3000);  
+    }
+  }

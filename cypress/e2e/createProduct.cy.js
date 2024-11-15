@@ -2,15 +2,11 @@
 import { createProduct } from '../support/allFunction/createProductFunction';
 import { goToShop,logout} from '../support/allFunction/generalFunction';
 
+
 describe('create product test dev', () => {
-
-  beforeEach(() => {
-    cy.viewport(1290, 900);
-  });
-
   it('create product pass', () => {
     goToShop('dev');
-    createProduct('ff','a_','ของดีจากนครนายก','ทั่วไป',60,16,50,13555,5);
+    createProduct('ff','ของดีจากนครนายก','ทั่วไป',60,16,50,13555,5);
     logout();
   });
   
