@@ -40,6 +40,5 @@
       cy.get('.block-card').contains('ร้านขายเสื้อ by DUCK [TEST]').click();
       cy.wait(2000);
     }
-    
   }
 

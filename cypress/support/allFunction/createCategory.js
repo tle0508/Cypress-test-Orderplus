@@ -1,9 +1,12 @@
 function generateRandomCategory() {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const randomLetter1 = letters.charAt(Math.floor(Math.random() * letters.length));// ฟังก์ชันสุ่มตัวอักษร A-Z 
-  const randomLetter2 = letters.charAt(Math.floor(Math.random() * letters.length));
-  const randomNumber = Math.floor(Math.random() * 1001); // สุ่ม 0-1000
-  return `${randomLetter1}${randomLetter2}${randomNumber}`;
+  // สุ่มตัวอักษร A-Z สองรอบแล้วรวมกัน
+  const randomLetter2 = Array.from({ length: 2 }, () => 
+    letters.charAt(Math.floor(Math.random() * letters.length))
+  ).join('');
+  // สุ่มตัวเลข 0-9 จำนวน 4 รอบ และรวมเป็น String เดียว
+  const randomNumber = Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join('');
+  return `${randomLetter2}${randomNumber}`;
 }
 
 export function createCategory() {
