@@ -1,19 +1,26 @@
-export function login(server) {
+  export function login(server) {
     if(server == 'dev'){
       cy.visit('https://app-dev.orderplus.me/login');
-      cy.get('input[placeholder="หมายเลขโทรศัพท์"]').type('0918517610');
       cy.wait(1000);
-      cy.get('input[placeholder="รหัสผ่าน"]').type('testtest');
-      cy.wait(1000);
+      checkpathAndKey('0918517610','testtest');
     }else{
       cy.visit('https://web.orderplus.me/login');
-      cy.get('input[placeholder="หมายเลขโทรศัพท์"]').type('0951385471');
       cy.wait(1000);
-      cy.get('input[placeholder="รหัสผ่าน"]').type('testtest');
-      cy.wait(1000);
+      checkpathAndKey('0951385471','testtest');
     }
-    cy.contains('span','เข้าสู่ระบบ').click();
-    cy.wait(1000);
+  }
+
+  export function checkpathAndKey(username,password){
+    cy.location('pathname').then((pathname) => {
+      if (pathname === '/login') {
+        cy.get('input[placeholder="หมายเลขโทรศัพท์"]').type(username);
+        cy.wait(1000);
+        cy.get('input[placeholder="รหัสผ่าน"]').type(password);
+        cy.wait(1000);
+        cy.contains('span','เข้าสู่ระบบ').click();
+        cy.wait(1000);
+      }
+    });
   }
 
   

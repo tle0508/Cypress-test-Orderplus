@@ -349,9 +349,6 @@
       cy.get('body').then(($body) => {
         if ($body.find('.el-dialog.el-dialog--center').length > 0) {
           cy.get('.el-dialog.el-dialog--center').contains('span', 'ยืนยัน').click();
-        } else {
-          // Dialog not found, so skip the confirmation step
-          cy.log('No confirmation dialog appeared, skipping...');
         }
       });
       cy.wait(3000);  
