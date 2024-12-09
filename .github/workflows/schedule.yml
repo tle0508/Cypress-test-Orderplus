@@ -1,8 +1,8 @@
 name: Run Cypress Tests Daily
 
 on:
-  schedule:
-    - cron: '0 22 * * *' # เวลา 5 โมงเช้าไทย (22:00 UTC)
+    schedule:
+      - cron: '30 9 * * *' # เวลา 16:30 ไทย (9:30 UTC)
 
 jobs:
   cypress-run:
