@@ -1,0 +1,30 @@
+name: Run Cypress Tests Daily
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # เวลา 5 โมงเช้าไทย (22:00 UTC)
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ดึงโค้ดจากโปรเจกต์
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # ติดตั้ง Node.js
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # ติดตั้ง dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # รัน Cypress tests
+      - name: Run Cypress tests
+        run: npx cypress run
+        env:
+          CYPRESS_RECORD_KEY: 81c2de37-06ce-4547-9e6e-b864ea09053b # ใช้ Cypress Cloud Key

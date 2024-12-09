@@ -1,7 +1,7 @@
   export function login(server) {
     if(server == 'dev'){
       cy.visit('https://app-dev.orderplus.me/login');
-      cy.wait(1000);
+      cy.wait(1500);
       checkpathAndKey('0918517610','testtest');
     }else{
       cy.visit('https://web.orderplus.me/login');
@@ -33,12 +33,12 @@
   export function goToShop(server) {
     if(server == 'dev'){
       login('dev');
-      cy.get('.block-card').contains('กุ่กกุ่กกั่กกั่กกั้กกั่กกุ้กกุ้ก').click();
-      cy.wait(2000);
+      cy.get('.block-card').contains('[Test] TT_Shop').click();
+      cy.wait(1000);
     }else{
       login('prod');
       cy.get('.block-card').contains('ร้านขายเสื้อ by DUCK [TEST]').click();
-      cy.wait(2000);
+      cy.wait(1000);
     }
   }
 

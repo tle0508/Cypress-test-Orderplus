@@ -237,7 +237,7 @@
   
   }
 
-  export function createOrderByNum (name, phoneNumber, address, province, district, subDistrict, transport, price,orderCount) {
+  export function createOrderByNum (name, phoneNumber, address, province, district, subDistrict,orderCount) {
     cy.contains('span', 'คำสั่งซื้อ').click();
     cy.wait(1000);
     for (let i = 0; i < orderCount; i++) {
@@ -248,17 +248,12 @@
       cy.wait(1000);
       cy.contains('button', 'ยืนยัน').click();
    
-  
-      cy.contains('span', 'Thailand Post').parent().click();
-      cy.wait(1000);
-      cy.get('li.el-select-dropdown__item').contains('div', transport).click();
-      cy.wait(1000);
-  
-      cy.get('input[placeholder="ราคาสินค้า"]').type(price);
-      cy.wait(1000);
+      cy.contains('span','เลือกสินค้า').click();
+      cy.get('.el-checkbox__inner').eq(1).click();
+      cy.contains('span','ตกลง (1)').click();
       cy.get('.el-button.btn-create').click();
       cy.wait(2000);
-  
+
       cy.get('body').then(($body) => {
         if ($body.find('.el-dialog.el-dialog--center').length > 0) {
           cy.get('.el-dialog.el-dialog--center').contains('span', 'ยืนยัน').click();
