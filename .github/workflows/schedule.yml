@@ -1,8 +1,8 @@
 name: Run Cypress Tests Daily
 
 on:
-    schedule:
-      - cron: '30 9 * * *' # เวลา 16:30 ไทย (9:30 UTC)
+  schedule:
+    - cron: '30 9 * * *' # เวลา 16:30 ไทย (9:30 UTC)
 
 jobs:
   cypress-run:
@@ -18,6 +18,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+
+      # Cache node_modules และ Cypress binary
+      - name: Cache Cypress binary and node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/Cypress
+            node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
 
       # ติดตั้ง dependencies
       - name: Install dependencies
