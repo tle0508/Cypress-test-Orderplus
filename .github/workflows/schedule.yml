@@ -4,27 +4,41 @@ on:
     schedule:
       - cron: '30 9 * * *' # เวลา 16:30 ไทย (9:30 UTC)
 
-jobs:
-  cypress-run:
-    runs-on: ubuntu-latest
-
-    steps:
-      # ดึงโค้ดจากโปรเจกต์
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # ติดตั้ง Node.js
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      # ติดตั้ง dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # รัน Cypress tests
-      - name: Run Cypress tests
-        run: npx cypress run
-        env:
-            CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} 
+      jobs:
+        cypress-run:
+          runs-on: ubuntu-latest
+      
+          steps:
+            # ดึงโค้ดจากโปรเจกต์
+            - name: Checkout code
+              uses: actions/checkout@v3
+      
+            # ติดตั้ง Node.js
+            - name: Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 16
+      
+            # ติดตั้ง dependencies
+            - name: Install dependencies
+              run: npm install
+      
+            # Cache Cypress binary
+            - name: Cache Cypress binary
+              uses: actions/cache@v3
+              with:
+                path: ~/.cache/Cypress
+                key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                  ${{ runner.os }}-cypress-
+      
+            # ติดตั้ง Cypress binary (ถ้าไม่มี)
+            - name: Install Cypress
+              run: npx cypress install
+      
+            # รัน Cypress tests
+            - name: Run Cypress tests
+              run: npx cypress run
+              env:
+                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      
