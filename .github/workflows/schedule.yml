@@ -27,4 +27,4 @@ jobs:
       - name: Run Cypress tests
         run: npx cypress run
         env:
-          CYPRESS_RECORD_KEY: 81c2de37-06ce-4547-9e6e-b864ea09053b # ใช้ Cypress Cloud Key
+            CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} #ใช้ Cypress Cloud Key
