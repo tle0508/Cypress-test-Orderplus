@@ -21,7 +21,7 @@ jobs:
 
       # ติดตั้ง dependencies
       - name: Install dependencies
-        run: npm init
+        run: npm install
 
       # ติดตั้ง Cypress binary (ถ้าไม่มี)
       - name: Install Cypress
