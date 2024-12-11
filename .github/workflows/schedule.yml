@@ -2,11 +2,11 @@ name: Run Cypress Tests Daily
 
 on:
   schedule:
-    - cron: '30 9 * * *' # 15:30
+    - cron: '30 10 * * *' # 17:30
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       # แสดงวันที่รันใน Log
@@ -33,5 +33,5 @@ jobs:
 
       # รัน Cypress tests
       - name: Run Cypress tests
-        run: npx cypress run --record --key 81c2de37-06ce-4547-9e6e-b864ea09053b
+        run: npx cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
         
