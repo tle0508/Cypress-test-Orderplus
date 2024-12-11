@@ -2,13 +2,17 @@ name: Run Cypress Tests Daily
 
 on:
   schedule:
-    - cron: '0 22 * * *' # เวลา 5 โมงเช้าไทย (22:00 UTC)
+    - cron: '30 6 * * *' # 13:30
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
     steps:
+      # แสดงวันที่รันใน Log
+      - name: Print today's date
+        run: echo "Test is running on $(date +"%d-%m-%Y")"
+        
       # ดึงโค้ดจากโปรเจกต์
       - name: Checkout code
         uses: actions/checkout@v3
@@ -18,17 +22,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-
-      # Cache node_modules และ Cypress binary
-      - name: Cache Cypress binary and node_modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cache/Cypress
-            node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
 
       # ติดตั้ง dependencies
       - name: Install dependencies
