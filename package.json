@@ -6,7 +6,6 @@
     "scripts": {
       "cypress:open": "cypress open",
       "test": "npx cypress run --record --key 81c2de37-06ce-4547-9e6e-b864ea09053b"
-      
     }
   ,
   "author": "",
