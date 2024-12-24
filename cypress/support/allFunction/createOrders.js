@@ -247,7 +247,7 @@
       cy.get('textarea').clear().first().type(`${name}${i + 1} ${phoneNumber} ${address} ${province} ${district} ${subDistrict}`);
       cy.wait(1000);
       cy.contains('button', 'ยืนยัน').click();
-   
+      cy.wait(2000);
       cy.contains('span','เลือกสินค้า').click();
       cy.get('.el-checkbox__inner').eq(1).click();
       cy.contains('span','ตกลง (1)').click();
@@ -255,7 +255,7 @@
       cy.wait(2000);
 
       cy.get('body').then(($body) => {
-        if ($body.find('.el-dialog.el-dialog--center').length > 0) {
+        if ($body.find("p.header-txt:contains('แจ้งเตือนข้อมูลออเดอร์ซ้ำ')").length > 0) {
           cy.get('.el-dialog.el-dialog--center').contains('span', 'ยืนยัน').click();
         } else {
           // Dialog not found, so skip the confirmation step

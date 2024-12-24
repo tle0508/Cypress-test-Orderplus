@@ -1,44 +1,46 @@
-  export function login(server) {
-    if(server == 'dev'){
-      cy.visit('https://app-dev.orderplus.me/login');
-      cy.wait(1500);
-      checkpathAndKey('0918517610','testtest');
-    }else{
-      cy.visit('https://web.orderplus.me/login');
-      cy.wait(1000);
-      checkpathAndKey('0951385471','testtest');
+export function goToShop(server) {
+  if (server === 'dev') {
+    cy.visit('https://app-dev.orderplus.me/login');
+    checkpathAndKey('0918517610', 'testtest');
+    checkDialog();
+    cy.contains('.block-card', '[Test] TT_Shop')
+      .should('be.visible')
+      .click();
+  } else {
+    login('prod');
+    cy.visit('https://web.orderplus.me/login');
+    checkpathAndKey('0951385471', 'testtest');
+    checkDialog();
+    cy.contains('.block-card', 'ร้านขายเสื้อ by DUCK [TEST]')
+      .should('be.visible')
+      .click();
+  }
+}
+
+
+export function checkpathAndKey(username,password){
+  cy.wait(2000);
+  cy.location('pathname').then((pathname) => {
+  if (pathname === '/login') {
+  cy.get('input[placeholder="หมายเลขโทรศัพท์"]').should('be.visible').type(username);
+  cy.get('input[placeholder="รหัสผ่าน"]').should('be.visible').type(password);
+  cy.contains('span', 'เข้าสู่ระบบ').should('be.visible').click();
+  }
+});
+}
+
+
+export function checkDialog() {
+  cy.wait(1000);
+  cy.get('body').then(($body) => {
+    if ($body.find('.el-dialog.el-dialog--center').length > 0) {
+      // ถ้ามี dialog อยู่ใน DOM
+      cy.get('.el-dialog.el-dialog--center')
+        .contains('span', 'ปิดหน้าต่าง')
+        .should('be.visible')
+        .click();
     }
-  }
+  });
+}
 
-  export function checkpathAndKey(username,password){
-    cy.location('pathname').then((pathname) => {
-      if (pathname === '/login') {
-        cy.get('input[placeholder="หมายเลขโทรศัพท์"]').type(username);
-        cy.wait(1000);
-        cy.get('input[placeholder="รหัสผ่าน"]').type(password);
-        cy.wait(1000);
-        cy.contains('span','เข้าสู่ระบบ').click();
-        cy.wait(1000);
-      }
-    });
-  }
-
-  
-  export function logout() {
-    cy.get('.custom-line').first().click();
-    cy.wait(2000);
-    cy.get('li.el-menu-item.menu-logout').contains('ออกจากระบบ').click();
-  }
-
-  export function goToShop(server) {
-    if(server == 'dev'){
-      login('dev');
-      cy.get('.block-card').contains('[Test] TT_Shop').click();
-      cy.wait(1000);
-    }else{
-      login('prod');
-      cy.get('.block-card').contains('ร้านขายเสื้อ by DUCK [TEST]').click();
-      cy.wait(1000);
-    }
-  }
 
