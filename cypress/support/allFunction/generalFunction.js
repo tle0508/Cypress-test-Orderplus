@@ -1,8 +1,10 @@
 export function goToShop(server) {
   if (server === 'dev') {
     cy.visit('https://app-dev.orderplus.me/login');
+
     checkpathAndKey('0918517610', 'testtest');
     checkDialog();
+
     cy.contains('.block-card', '[Test] TT_Shop')
       .should('be.visible')
       .click();
@@ -31,15 +33,10 @@ export function checkpathAndKey(username,password){
 
 
 export function checkDialog() {
-  cy.wait(1000);
-  cy.get('body').then(($body) => {
-    if ($body.find('.el-dialog.el-dialog--center').length > 0) {
-      // ถ้ามี dialog อยู่ใน DOM
-      cy.get('.el-dialog.el-dialog--center')
-        .contains('span', 'ปิดหน้าต่าง')
-        .should('be.visible')
-        .click();
-    }
+  cy.get('.el-dialog.el-dialog--center', { timeout: 10000 })
+  .should('be.visible') 
+  .within(() => {
+    cy.contains('span', 'ปิดหน้าต่าง').should('be.visible').click();
   });
 }
 

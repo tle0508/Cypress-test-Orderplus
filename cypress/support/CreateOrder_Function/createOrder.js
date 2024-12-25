@@ -1,21 +1,18 @@
 export function createOrder() {
   cy.contains("span", "คำสั่งซื้อ").click();
-  
-
   cy.contains("li.el-menu-item", "สร้างออเดอร์").click();
   
-
   FillInAdress_easily();
   
-
   cy.contains("span", "เลือกสินค้า").click();
   cy.get(".el-checkbox__inner").eq(1).click();
+
   cy.contains("span", "ตกลง (1)").click();
   cy.get(".el-button.btn-create").click();
   cy.wait(2000);
 
   checkDialogRepeatOrders();
- 
+
 }
 
 export function FillInAdress_easily() {
@@ -32,3 +29,9 @@ cy.get("body").then(($body) => {
     }
   });
 }
+
+export function chooseProduct(choice) {
+  if (choice) {
+    
+  }
+  }
