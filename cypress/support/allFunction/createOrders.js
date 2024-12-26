@@ -318,34 +318,4 @@
     }
   }
 
-  export function createOrderByYourSelf (name, phoneNumber, address, province, district, subDistrict, price,orderCount) {
-    cy.contains('span', 'คำสั่งซื้อ').click();
-    cy.wait(1000);
-    for (let i = 0; i < orderCount; i++) {
-      cy.contains('li.el-menu-item', 'สร้างออเดอร์').click();
-      cy.wait(1000);
-
-      cy.get('textarea').clear().first().type(`${name}${i + 1} ${phoneNumber} ${address} ${province} ${district} ${subDistrict}`);
-      cy.wait(1000);
-      cy.contains('button', 'ยืนยัน').click();
-      cy.wait(1000);
-
-      cy.contains('span', 'จัดส่งในระบบ').parent().click();
-      cy.wait(1000);
-      cy.get('li.el-select-dropdown__item').contains('div','จัดส่งเอง').click();
-      cy.wait(1000);
-      
-      cy.contains('span','เลือกสินค้า').click();
-      cy.get('.el-checkbox__inner').eq(1).click();
-      cy.contains('span','ตกลง (1)').click();
-      cy.get('.el-button.btn-create').click();
-      cy.wait(2000);
   
-      cy.get('body').then(($body) => {
-        if ($body.find('.el-dialog.el-dialog--center').length > 0) {
-          cy.get('.el-dialog.el-dialog--center').contains('span', 'ยืนยัน').click();
-        }
-      });
-      cy.wait(3000);  
-    }
-  }
